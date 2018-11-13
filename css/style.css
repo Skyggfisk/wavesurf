@@ -1,0 +1,19 @@
+#content {
+  display: flex;
+  justify-content: center;
+  padding: 30 0px;
+}
+
+#controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.fas:hover {
+  color: purple;
+}
+
+i {
+  padding: 4 10px;
+}
