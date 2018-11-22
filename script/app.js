@@ -1,7 +1,7 @@
-// setup
+// setup wavesurfer
 const wavesurfer = WaveSurfer.create({
   container: "#waveform",
-  waveColor: "violet",
+  waveColor: "darkorchid",
   progressColor: "purple",
   responsive: true
 });
