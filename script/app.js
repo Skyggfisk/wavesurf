@@ -13,6 +13,7 @@ wavesurfer.setVolume(0.5);
 // upload track to play
 document.querySelector("#upload-track").addEventListener("change", function() {
   let trackUrl = URL.createObjectURL(this.files[0]);
+  console.log(trackUrl);
   wavesurfer.load(trackUrl);
 });
 
