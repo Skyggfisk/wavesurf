@@ -1,5 +1,5 @@
 body {
-  background-color: dimgrey;
+  background-color: lightgrey;
 }
 
 .player {
@@ -10,9 +10,30 @@ body {
   min-height: 100vh;
 }
 
-.songs {
-  height: 800px;
+.pl-header {
+  font-size: 30px;
+  text-align: center;
+  background-color: blanchedalmond;
+}
+
+.playlist {
+  min-height: auto;
+  max-height: 500px;
   overflow: auto;
+  background-color: burlywood;
+  padding: 5px;
+}
+
+.song {
+  display: flex;
+}
+
+.song-name {
+  width: 80%;
+}
+
+.song-length {
+  width: 20%;
 }
 
 .upload {
@@ -85,6 +106,12 @@ i {
   .content {
     display: flex;
     justify-content: space-between;
+  }
+
+  .playlist {
+    position: fixed;
+    bottom: 0px;
+    width: 23%;
   }
 
   .col-1 {
