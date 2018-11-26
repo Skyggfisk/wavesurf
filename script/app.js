@@ -15,6 +15,31 @@ document.querySelector("#upload-track").addEventListener("change", function() {
   let trackUrl = URL.createObjectURL(this.files[0]);
   console.log(trackUrl);
   wavesurfer.load(trackUrl);
+
+  // create and add new song element to the playlist
+  // let song = document.createElement("div");
+  // song.classList.add("song");
+  // let songname = document.createElement("p");
+  // songname.classList.add("song-name");
+  // let songlength = document.createElement("p");
+  // songlength.classList.add("song-length");
+
+  // songname.innerHTML("en sang");
+  // songlength.innerHTML("0:00");
+
+  let songhtml = "";
+  songhtml +=
+    "<div class='song'><p class='song-name>en sang</p><p class='song-length'>0:00</p></div>";
+
+  let playlist = document.getElementsByClassName("playlist");
+
+  // document.querySelector(".playlist").insertAdjacentHTML(
+  //   beforeend,
+  //   `<div class="song">
+  //       <p class="song-name">${trackUrl}</p>
+  //       <p class="song-length">0:00</p>
+  //     </div>`
+  // );
 });
 
 // play-pause event handler

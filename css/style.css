@@ -7,7 +7,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
 }
 
 .pl-header {
@@ -18,7 +17,7 @@ body {
 
 .playlist {
   min-height: auto;
-  max-height: 500px;
+  max-height: 395px;
   overflow: auto;
   background-color: burlywood;
   padding: 5px;
@@ -78,7 +77,7 @@ body {
 }
 
 #waveform {
-  width: 50%;
+  width: 95%;
 }
 
 #controls {
@@ -112,6 +111,7 @@ i {
     position: fixed;
     bottom: 0px;
     width: 23%;
+    float: right;
   }
 
   .col-1 {

@@ -18,7 +18,7 @@
   </head>
   <body>
     <div class="content">
-      <section class="player col-9">
+      <div class="player col-12">
         <div id="waveform"></div>
         <div id="controls">
           <i class="fas fa-play fa-3x play-pause-button"></i>
@@ -36,142 +36,34 @@
         <div class="upload">
           <input type="file" accept="audio/*" id="upload-track" />
         </div>
-      </section>
-      <section class="songs col-3">
-        <div class="playlist">
-          <div class="pl-header">Playlist</div>
-          <div class="song" id="03">
-            <p class="song-name">It Me</p>
-            <p class="song-length">5:13</p>
-          </div>
-          <div class="song" id="02">
-            <p class="song-name">JavaScript - Computers</p>
-            <p class="song-length">2:50</p>
-          </div>
-          <div class="song" id="01">
-            <p class="song-name">Hello - HelloWorld.exe</p>
-            <p class="song-length">4:03</p>
-          </div>
-          <div class="song" id="03">
-            <p class="song-name">It Me - Not That Guy</p>
-            <p class="song-length">5:13</p>
-          </div>
-          <div class="song" id="03">
-            <p class="song-name">It Me - That Guy</p>
-            <p class="song-length">5:13</p>
-          </div>
-          <div class="song" id="02">
-            <p class="song-name">JavaScript</p>
-            <p class="song-length">2:50</p>
-          </div>
-          <div class="song" id="01">
-            <p class="song-name">Hello</p>
-            <p class="song-length">4:03</p>
-          </div>
-          <!--
-            <div class="song" id="03">
-              <p class="song-name">It Me - Not That Guy</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="02">
-              <p class="song-name">JavaScript - Computers</p>
-              <p class="song-length">2:50</p>
-            </div>
-            <div class="song" id="01">
-              <p class="song-name">Hello - HelloWorld.exe</p>
-              <p class="song-length">4:03</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me - Not That Guy</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me - That Guy</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="02">
-              <p class="song-name">JavaScript</p>
-              <p class="song-length">2:50</p>
-            </div>
-            <div class="song" id="01">
-              <p class="song-name">Hello</p>
-              <p class="song-length">4:03</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me - Not That Guy</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="02">
-              <p class="song-name">JavaScript - Computers</p>
-              <p class="song-length">2:50</p>
-            </div>
-            <div class="song" id="01">
-              <p class="song-name">Hello - HelloWorld.exe</p>
-              <p class="song-length">4:03</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me - Not That Guy</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me - That Guy</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="02">
-              <p class="song-name">JavaScript</p>
-              <p class="song-length">2:50</p>
-            </div>
-            <div class="song" id="01">
-              <p class="song-name">Hello</p>
-              <p class="song-length">4:03</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me - Not That Guy</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="02">
-              <p class="song-name">JavaScript - Computers</p>
-              <p class="song-length">2:50</p>
-            </div>
-            <div class="song" id="01">
-              <p class="song-name">Hello - HelloWorld.exe</p>
-              <p class="song-length">4:03</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me - Not That Guy</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me - That Guy</p>
-              <p class="song-length">5:13</p>
-            </div>
-            <div class="song" id="02">
-              <p class="song-name">JavaScript</p>
-              <p class="song-length">2:50</p>
-            </div>
-            <div class="song" id="01">
-              <p class="song-name">Hello</p>
-              <p class="song-length">4:03</p>
-            </div>
-            <div class="song" id="03">
-              <p class="song-name">It Me - Not That Guy</p>
-              <p class="song-length">5:13</p>
-            </div>
-          -->
+      </div>
+      <div class="playlist col-3">
+        <div class="pl-header">Playlist</div>
+        <div class="song">
+          <p class="song-name">It Me</p>
+          <p class="song-length">5:13</p>
         </div>
-      </section>
+        <div class="song">
+          <p class="song-name">JavaScript - Computers</p>
+          <p class="song-length">2:50</p>
+        </div>
+        <div class="song">
+          <p class="song-name">Hello - HelloWorld.exe</p>
+          <p class="song-length">4:03</p>
+        </div>
+        <div class="song">
+          <p class="song-name">It Me</p>
+          <p class="song-length">5:13</p>
+        </div>
+        <div class="song">
+          <p class="song-name">JavaScript - Computers</p>
+          <p class="song-length">2:50</p>
+        </div>
+        <div class="song">
+          <p class="song-name">Hello - HelloWorld.exe</p>
+          <p class="song-length">4:03</p>
+        </div>
+      </div>
     </div>
   </body>
   <script src="script/app.js"></script>
