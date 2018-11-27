@@ -2,6 +2,10 @@ body {
   background-color: lightgrey;
 }
 
+#hidden-audio {
+  display: none;
+}
+
 .player {
   display: flex;
   flex-direction: column;
@@ -15,9 +19,9 @@ body {
   background-color: blanchedalmond;
 }
 
-.playlist {
+#playlist {
   min-height: auto;
-  max-height: 395px;
+  max-height: 345px;
   overflow: auto;
   background-color: burlywood;
   padding: 5px;
@@ -25,17 +29,21 @@ body {
 
 .song {
   display: flex;
+  justify-content: space-between;
 }
 
 .song-name {
-  width: 80%;
+  width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .song-length {
   width: 20%;
 }
 
-.upload {
+#upload {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -107,7 +115,7 @@ i {
     justify-content: space-between;
   }
 
-  .playlist {
+  #playlist {
     position: fixed;
     bottom: 0px;
     width: 23%;
