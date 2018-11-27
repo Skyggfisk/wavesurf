@@ -10,10 +10,6 @@ const wavesurfer = WaveSurfer.create({
 // I did this because I have no idea how to get the file name from a blob / HTMLAudioElement's src
 var songName = "";
 
-// autoload test file and set volume to 50%
-wavesurfer.load("audio/Vivaldi-The_Four_Seasons/01_-_Spring_Mvt_1_Allegro.mp3");
-wavesurfer.setVolume(0.5);
-
 // upload track to play and add to playlist
 document.querySelector("#upload-track").addEventListener("change", function() {
   let trackUrl = URL.createObjectURL(this.files[0]);
@@ -56,6 +52,8 @@ document
     );
   });
 
+// document.querySelector(".song-name");
+
 // play-pause event handler
 document
   .querySelector(".play-pause-button")
@@ -88,6 +86,7 @@ document
 document.querySelector(".stop-button").addEventListener("click", function() {
   wavesurfer.stop();
   if (wavesurfer.isPlaying()) {
+    // TODO this doesnt change pause to play when stop button is clicked
     let pp = document.querySelector(".play-pause-button");
     pp.classList.remove("fa-pause");
     pp.classList.add("fa-play");
