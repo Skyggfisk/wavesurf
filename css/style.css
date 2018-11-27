@@ -32,11 +32,17 @@ body {
   justify-content: space-between;
 }
 
+.song:hover {
+  background-color: chocolate;
+  cursor: pointer;
+}
+
 .song-name {
   width: 60%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-left: 5px;
 }
 
 .song-length {
