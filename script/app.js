@@ -1,28 +1,83 @@
-// setup wavesurfer
-const wavesurfer = WaveSurfer.create({
-  container: "#waveform",
-  waveColor: "darkorchid",
-  progressColor: "purple",
-  responsive: true
-});
-
 // global used to pass song name from upload handler to hidden audio
 // I did this because I have no idea how to get the file name from a blob / HTMLAudioElement's src
-var songName = "";
+let songName;
+let db;
 
-// upload track to play and add to playlist
-document.querySelector("#upload-track").addEventListener("change", function() {
-  let trackUrl = URL.createObjectURL(this.files[0]);
-  wavesurfer.load(trackUrl);
+window.onload = function() {
+  // setup wavesurfer
+  const wavesurfer = WaveSurfer.create({
+    container: "#waveform",
+    waveColor: "darkorchid",
+    progressColor: "purple",
+    responsive: true
+  });
 
-  // get file duration, refer to event handler for more details
-  let audio = document.getElementById("hidden-audio");
-  audio.src = trackUrl;
-  audio.load();
+  // IDB functionality
+  // https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage
+  // request to open db called playlist v1.0
+  let req = window.indexedDB.open("playlist", 1);
 
-  // Avert your eyes!
-  songName = this.files[0].name;
-});
+  // print to console in case of error
+  req.onerror = function() {
+    console.log("Failed to open database.");
+  };
+
+  // set db object in case of success
+  req.onsuccess = function() {
+    console.log("Opened database successfully.");
+    db = req.result;
+  };
+
+  // Setup object store
+  req.onupgradeneeded = function(e) {
+    let db = e.target.result;
+
+    db.createObjectStore("songs", {
+      keyPath: "id",
+      autoIncrement: true
+    });
+
+    // Define what data items the objectStore will contain
+    // objectStore.createIndex("title", "title", { unique: false });
+    // objectStore.createIndex("duration", "duration", { unique: false });
+    // objectStore.createIndex("data");
+
+    console.log("Database setup complete");
+  };
+
+  // upload track to play and add to playlist
+  document
+    .querySelector("#upload-track")
+    .addEventListener("change", function() {
+      let song = URL.createObjectURL(this.files[0]);
+      wavesurfer.load(song);
+
+      // let testObj = { title: "hello", body: "this is a body" };
+      console.log(song);
+      let trx = db.transaction(["songs"], "readwrite");
+      let objStore = trx.objectStore("songs");
+      var request = objStore.add(this.files[0]);
+      request.onsuccess = function() {
+        console.log("something happened");
+      };
+
+      trx.oncomplete = function() {
+        console.log("Transaction completed. Added something.");
+      };
+
+      trx.onerror = function() {
+        console.log("Transaction error.");
+      };
+
+      // add file to playlist, refer to event handler for more details
+      let audio = document.getElementById("hidden-audio");
+      audio.src = trackUrl;
+      audio.load();
+
+      // Avert your eyes!
+      songName = this.files[0].name;
+    });
+};
 
 // hidden audio event-handler, used to get song duration
 // modified version of https://jsfiddle.net/derickbailey/s4P2v/
