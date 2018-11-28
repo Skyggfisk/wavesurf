@@ -88,6 +88,8 @@ function addToIDB(track) {
   trx.onerror = () => {
     console.log("Transaction error.");
   };
+
+  return 1;
 }
 
 // hidden audio event-handler, used to get song duration
@@ -109,18 +111,20 @@ function hiddenAudioEventHandler() {
       song.duration = time;
 
       // add to song store, now that we have all the data
-      addToIDB(song);
+      let songKey = addToIDB(song);
 
       console.log("LOADED FILE: " + this.src + "\n DURATION: " + time);
 
       // insert new track in the playlist
-      document.getElementById("playlist").insertAdjacentHTML(
-        "beforeend",
-        `<div class="song" id="${1}">
-          <p class="song-name">${song.title}</p>
-          <p class="song-length">${time}</p>
-        </div>`
-      );
+      // what am I doing with my life...
+      let songDiv = document.createElement("div");
+      songDiv.className = "song";
+      songDiv.id = songKey;
+      songDiv.innerHTML = `<p class="song-name">${
+        song.title
+      }</p><p class="song-length">${time}</p>`;
+      songDiv.onclick = playSongFromPlaylist;
+      document.getElementById("playlist").appendChild(songDiv);
     });
 }
 
@@ -178,4 +182,10 @@ function volumeEventHandler() {
       let voltext = document.querySelector(".volume-text");
       voltext.innerHTML = `${this.value}%`;
     });
+}
+
+// play the song clicked in the playlist
+function playSongFromPlaylist() {
+  // TODO
+  console.log("clicked!");
 }
