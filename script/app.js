@@ -12,7 +12,7 @@ const wavesurfer = WaveSurfer.create({
 });
 
 window.onload = function() {
-  // idb functionality
+  // idb setup
   // https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Client-side_storage
   // request to open db called playlist v1.0
   let req = window.indexedDB.open("playlist", 1);
@@ -187,6 +187,13 @@ function volumeEventHandler() {
 
 // play the song clicked in the playlist
 function playSongFromPlaylist() {
-  // TODO
-  console.log("clicked!");
+  let trx = db.transaction(["songs"], "readonly");
+  let objStore = trx.objectStore("songs");
+  let req = objStore.get(parseInt(this.id)); // string =/= int
+
+  req.onsuccess = function() {
+    console.log(`got result:\n ${req.result.data}`);
+    let track = URL.createObjectURL(req.result.data); // possible memory leak...
+    wavesurfer.load(track);
+  };
 }
