@@ -74,10 +74,16 @@ function uploadTrackEventHandler() {
 }
 
 // opens a transaction and adds the given track to the "songs" store
-function addToIDB(track) {
+function addToIDB(track, cb) {
   let trx = db.transaction(["songs"], "readwrite");
   let objStore = trx.objectStore("songs");
-  objStore.add(track);
+  let req = objStore.add(track);
+
+  // on success print the id key and set return variable to result
+  req.onsuccess = function(e) {
+    console.log(`Song saved with id: ${e.target.result}`);
+    cb(e.target.result); // this should probably have some sort of error handling...
+  };
 
   // log transaction completion
   trx.oncomplete = () => {
@@ -85,11 +91,10 @@ function addToIDB(track) {
   };
 
   // log transaction error
-  trx.onerror = () => {
+  trx.onerror = function(e) {
     console.log("Transaction error.");
+    console.log(trx.error);
   };
-
-  return 1;
 }
 
 // hidden audio event-handler, used to get song duration
@@ -100,31 +105,27 @@ function hiddenAudioEventHandler() {
     .addEventListener("canplaythrough", function() {
       let seconds = this.duration;
       let duration = moment.duration(seconds, "seconds");
-
       let time = "";
       let hours = duration.hours();
       if (hours > 0) {
         time = hours + ":";
       }
-
       time = time + duration.minutes() + ":" + duration.seconds();
       song.duration = time;
 
-      // add to song store, now that we have all the data
-      let songKey = addToIDB(song);
-
-      console.log("LOADED FILE: " + this.src + "\n DURATION: " + time);
-
-      // insert new track in the playlist
-      // what am I doing with my life...
-      let songDiv = document.createElement("div");
-      songDiv.className = "song";
-      songDiv.id = songKey;
-      songDiv.innerHTML = `<p class="song-name">${
-        song.title
-      }</p><p class="song-length">${time}</p>`;
-      songDiv.onclick = playSongFromPlaylist;
-      document.getElementById("playlist").appendChild(songDiv);
+      // add to song store, now that we have all the data and grab the key
+      addToIDB(song, function(res) {
+        // insert new track in the playlist
+        // what am I doing with my life...
+        let songDiv = document.createElement("div");
+        songDiv.className = "song";
+        songDiv.id = res;
+        songDiv.innerHTML = `<p class="song-name">${
+          song.title
+        }</p><p class="song-length">${time}</p>`;
+        songDiv.onclick = playSongFromPlaylist;
+        document.getElementById("playlist").appendChild(songDiv);
+      });
     });
 }
 
