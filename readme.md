@@ -1,7 +1,6 @@
 # Front end assignment #02
 
-Hosted at:
-https://skyggfisk.github.io
+Hosted at: https://skyggfisk.github.io
 
 Create an audio player in the browser. The assignment must have the following:
 
@@ -13,6 +12,8 @@ Create an audio player in the browser. The assignment must have the following:
 - [x] Able to create a playlist
 - [x] Playlist available offline
 - [ ] App responsive using a framework
+
+(it is responsive, I'm just not using a framework)
 
 ## Part 2
 
