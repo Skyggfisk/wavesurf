@@ -1,6 +1,6 @@
 // global song obj used to pass info from upload handler to hidden audio
 // I did this because I have no idea how to get the file name from a blob / HTMLAudioElement's src
-let song = { title: "", data: "", duration: "" };
+let song = { title: "", data: "", duration: "" }; // TODO find a better way to pass data between functions
 let db;
 
 // setup wavesurfer
@@ -54,25 +54,6 @@ window.onload = function() {
   volumeEventHandler();
 };
 
-// upload track event handler
-function uploadTrackEventHandler() {
-  document
-    .querySelector("#upload-track")
-    .addEventListener("change", function() {
-      let songObj = URL.createObjectURL(this.files[0]);
-      wavesurfer.load(songObj);
-      console.log(this.files[0]);
-
-      song.data = this.files[0];
-      song.title = this.files[0].name;
-
-      // add file to playlist, refer to hidden audio event handler for more details
-      let audio = document.getElementById("hidden-audio");
-      audio.src = songObj;
-      audio.load();
-    });
-}
-
 // opens a transaction and adds the given track to the "songs" store
 function addToIDB(track, cb) {
   let trx = db.transaction(["songs"], "readwrite");
@@ -95,6 +76,41 @@ function addToIDB(track, cb) {
     console.log("Transaction error.");
     console.log(trx.error);
   };
+}
+
+// play the song clicked in the playlist
+function playSongFromPlaylist() {
+  let trx = db.transaction(["songs"], "readonly");
+  let objStore = trx.objectStore("songs");
+  let req = objStore.get(parseInt(this.id)); // string =/= int
+
+  req.onsuccess = function() {
+    console.log(`got result:\n ${req.result.title}`);
+    let track = URL.createObjectURL(req.result.data); // possible memory leak...
+    wavesurfer.load(track);
+
+    // change title to the song's name
+    document.getElementById("song-title").innerHTML = req.result.title;
+  };
+}
+
+// upload track event handler
+function uploadTrackEventHandler() {
+  document
+    .querySelector("#upload-track")
+    .addEventListener("change", function() {
+      let songObj = URL.createObjectURL(this.files[0]);
+      wavesurfer.load(songObj);
+      console.log(this.files[0]);
+
+      song.data = this.files[0];
+      song.title = this.files[0].name;
+
+      // add file to playlist, refer to hidden audio event handler for more details
+      let audio = document.getElementById("hidden-audio");
+      audio.src = songObj;
+      audio.load();
+    });
 }
 
 // hidden audio event-handler, used to get song duration
@@ -183,17 +199,4 @@ function volumeEventHandler() {
       let voltext = document.querySelector(".volume-text");
       voltext.innerHTML = `${this.value}%`;
     });
-}
-
-// play the song clicked in the playlist
-function playSongFromPlaylist() {
-  let trx = db.transaction(["songs"], "readonly");
-  let objStore = trx.objectStore("songs");
-  let req = objStore.get(parseInt(this.id)); // string =/= int
-
-  req.onsuccess = function() {
-    console.log(`got result:\n ${req.result.data}`);
-    let track = URL.createObjectURL(req.result.data); // possible memory leak...
-    wavesurfer.load(track);
-  };
 }
