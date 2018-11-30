@@ -73,7 +73,7 @@ body {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: purple;
+  background: burlywood;
   cursor: pointer;
 }
 
@@ -82,7 +82,7 @@ body {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: purple;
+  background: burlywood;
   cursor: pointer;
 }
 
@@ -102,7 +102,7 @@ body {
 }
 
 .fas:hover {
-  color: purple;
+  color: burlywood;
 }
 
 i {

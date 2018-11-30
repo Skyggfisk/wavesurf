@@ -6,8 +6,8 @@ let db;
 // setup wavesurfer
 const wavesurfer = WaveSurfer.create({
   container: "#waveform",
-  waveColor: "darkorchid",
-  progressColor: "purple",
+  waveColor: "burlywood",
+  progressColor: "blanchedalmond",
   responsive: true
 });
 wavesurfer.setVolume(0.5);
