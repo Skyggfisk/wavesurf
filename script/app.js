@@ -10,6 +10,7 @@ const wavesurfer = WaveSurfer.create({
   progressColor: "purple",
   responsive: true
 });
+wavesurfer.setVolume(0.5);
 
 window.onload = function() {
   // idb setup
