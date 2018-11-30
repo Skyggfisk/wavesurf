@@ -27,6 +27,8 @@ window.onload = function() {
   req.onsuccess = function() {
     console.log("Opened database successfully.");
     db = req.result;
+    // build playlist
+    buildPlaylist();
   };
 
   // Setup object store
@@ -92,6 +94,27 @@ function playSongFromPlaylist() {
 
     // change title to the song's name
     document.getElementById("song-title").innerHTML = req.result.title;
+  };
+}
+
+// build the playlist from idb
+function buildPlaylist() {
+  let trx = db.transaction(["songs"], "readonly");
+  let objStore = trx.objectStore("songs");
+  let req = objStore.getAll();
+
+  // on success add songs to the playlist display
+  req.onsuccess = function() {
+    for (let i = 0; i < req.result.length; i++) {
+      let songDiv = document.createElement("div");
+      songDiv.className = "song";
+      songDiv.id = req.result[i].id;
+      songDiv.innerHTML = `<p class="song-name">${
+        req.result[i].title
+      }</p><p class="song-length">${req.result[i].duration}</p>`;
+      songDiv.onclick = playSongFromPlaylist;
+      document.getElementById("playlist").appendChild(songDiv); // not the most optimal way...
+    }
   };
 }
 
