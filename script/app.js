@@ -100,8 +100,6 @@ function uploadTrackEventHandler() {
     .querySelector("#upload-track")
     .addEventListener("change", function() {
       let songObj = URL.createObjectURL(this.files[0]);
-      wavesurfer.load(songObj);
-      console.log(this.files[0]);
 
       song.data = this.files[0];
       song.title = this.files[0].name;
