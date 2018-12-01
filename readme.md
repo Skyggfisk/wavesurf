@@ -3,6 +3,14 @@
 Hosted at: https://skyggfisk.github.io
 Tested on: Waterfox (Firefox fork 56.2.4), Firefox (63.0.3), Google Chrome (70.0)
 
+How to use:
+
+- Upload an audio file
+- This should add it to the playlist
+- Click a song to load it into the visualizer
+
+(There's a small `feature` with the play/pause button not always showing the correct icon. :disappointed_relieved:)
+
 Create an audio player in the browser. The assignment must have the following:
 
 ## Part 1
