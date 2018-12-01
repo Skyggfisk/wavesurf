@@ -168,6 +168,8 @@ function hiddenAudioEventHandler() {
 }
 
 // play-pause event handler
+// TODO several bugs to fix with displaying the right button,
+// functionality persists though
 function playPauseEventHandler() {
   document
     .querySelector(".play-pause-button")
