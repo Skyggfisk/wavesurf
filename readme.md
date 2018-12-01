@@ -1,7 +1,7 @@
 # Front end assignment #02
 
 Hosted at: https://skyggfisk.github.io
-Tested on: Waterfox (Firefox fork 56.2.4), Firefox (63.0.3), Google Chrome (70.0)
+Tested on: Waterfox (Firefox fork 56.2.4) / Firefox (63.0.3)
 
 How to use:
 
